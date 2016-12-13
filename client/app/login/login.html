@@ -1,0 +1,30 @@
+<div layout='row' layout-align='center center' class="top-margin">
+  <md-card flex='35' flex-sm='100' flex-xs='100' layout='column'>
+    <md-card-title align='center'>
+      <h1 flex>NIX</h1>
+    </md-card-title>
+    <md-card-content>
+      <form name='loginForm' ng-submit='$ctrl.login()'>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Correo</label>
+          <input name="correo" type='email' ng-model="$ctrl.model.correo" required>
+          <div ng-messages="loginForm.correo.$error" role="alert">
+            <div ng-message="required" class="my-message">Campo requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Contraseña</label>
+          <input name="pass" type='password' ng-model="$ctrl.model.pass" required>
+          <div ng-messages="loginForm.pass.$error" role="alert">
+            <div ng-message="required" class="my-message">Campo requerido.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" align='center'>
+          <md-button class="md-primary " type='submit' flex> Iniciar sesión</md-button>
+        </md-input-container>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

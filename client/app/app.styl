@@ -1,0 +1,27 @@
+$fa-font-path = '../assets/fonts/font-awesome/'
+@import '~font-awesome-stylus/stylus/index'
+
+
+
+
+//
+// App-wide Styles
+//
+
+.browserupgrade
+  background #ccc
+  color #000
+  margin 0.2em 0
+  padding 0.2em 0
+
+// Responsive: Portrait tablets and up
+@media screen and (min-width: 768px)
+  .container
+    max-width 730px
+
+// Component styles are injected through gulp
+/* inject:styl */
+@import 'login/login';
+@import 'main/master/master';
+@import 'menu/menu';
+/* endinject */
