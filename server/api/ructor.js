@@ -39,14 +39,15 @@ export function all () {
   return con(sentence,true);
 }
 
-export function findBy(where){
-  let sentence  = 'select * from  ' + entity + ' where '+ where.toString();
-  console.log(sentence);
+export function findBy(where,val){
+  let sentence  = "  select "+val+" from  " + entity + " where "+where;
+  console.dir(sentence);
   return con(sentence,true);
 }
 
 export function insert(val){
-  let sentence = 'insert into '+ entity +' values ('+ val.toString() +')'
+  let sentence = "insert into "+ entity +" values ("+ val +")"
+  console.dir(sentence);
   return con(sentence,false);
 }
 

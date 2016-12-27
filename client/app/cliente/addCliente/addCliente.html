@@ -1,0 +1,97 @@
+<div layout='row' layout-align='center center'>
+  <md-card flex='50'>
+    <div class="content-brand">
+      <md-card-title class="gradient-sub">
+        <md-card-title-text>
+          <span class="md-headline">Nuevo cliente</span>
+          <p class="md-body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.</p>
+        </md-card-title-text>
+      </md-card-title>
+    </div>
+    <md-card-content>
+      <form name="clientForm" ng-submit='$ctrl.nuevoCliente(clientForm)'>
+        <!--  Cliente  -->
+        <md-autocomplete
+          required
+          flex
+          md-input-name="cliente"
+          md-search-text="clienteSearch"
+          md-items="item in $ctrl.search(clienteSearch)"
+          md-item-text="item"
+          md-floating-label="Cliente">
+          <md-item-template>
+            <span md-highlight-text="clienteSearch">{{item}}</span>
+          </md-item-template>
+          <div ng-messages="clientForm.cliente.$error">
+            <div ng-message="required">Campo requerido </div>
+          </div>
+        </md-autocomplete>
+        <!-- SEDE -->
+        <md-input-container class="md-block" flex>
+          <label>Sede</label>
+          <input type='text' name="sede" ng-model="$ctrl.model.sede" md-maxlength="40" required>
+          <div ng-messages="clientForm.sede.$error">
+            <div ng-message="required">Campo requerido.</div>
+            <div ng-message="md-maxlength">El campo de sede no puede superar los 40 caracteres.</div>
+          </div>
+        </md-input-container>
+        <!-- Contacto -->
+        <md-input-container class="md-block" flex>
+          <label>Contacto</label>
+          <input type='text' name="contacto" ng-model="$ctrl.model.contacto" md-maxlength="50" required>
+          <div ng-messages="clientForm.contacto.$error">
+            <div ng-message="required">Campo requerido.</div>
+            <div ng-message="md-maxlength">El campo de contacto no puede superar los 50 caracteres.</div>
+          </div>
+        </md-input-container>
+        <!-- Correo-->
+        <md-input-container class="md-block" flex>
+          <label>Correo</label>
+          <input type='email' name="correo" ng-model="$ctrl.model.correo" md-maxlength="80" required>
+          <div ng-messages="clientForm.correo.$error">
+            <div ng-message="required">Campo requerido.</div>
+            <div ng-message="md-maxlength">El campo de correo no puede superar los 80 caracteres.</div>
+          </div>
+        </md-input-container>
+
+        <div layout='row'>
+          <md-input-container class="md-block" flex>
+            <label>Dirección</label>
+            <input type='text' name='direccion' ng-model='$ctrl.model.direccion' md-maxlength="100" required>
+            <div ng-messages="clientForm.direccion.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de direccion no puede superar los 100 caracteres.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>Telefono</label>
+            <input type='text' name='telefono' ng-model='$ctrl.model.telefono' md-maxlength="20" required>
+            <div ng-messages="clientForm.telefono.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de telefono no puede superar los 20 caracteres.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout='row'>
+          <md-input-container class="md-block" flex>
+            <label>Contraseña</label>
+            <input type='password' name='contrasena' ng-model='$ctrl.model.contrasena' md-maxlength="20" required>
+            <div ng-messages="clientForm.contrasena.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de contraseña no puede superar los 30 caracteres.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>Contraseña</label>
+            <input type='password' name='_contrasena' ng-model='$ctrl.model._contrasena' md-maxlength="20" required>
+            <div ng-messages="clientForm._contrasena.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de contraseña no puede superar los 30 caracteres.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-button class="md-primary" type='submit' ng-disabled='$ctrl.btnDisabled'>Registrar</md-button>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

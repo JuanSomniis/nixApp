@@ -1,35 +1,60 @@
 'use strict';
 const angular = require('angular');
 /*@ngInject*/
-export function bifrostService($http) {
+export function bifrostService($http, $hummer) {
   let gUrl = '/api/';
   let entity = '';
   let methods = {
-    find:find
-  }
+    find: find,
+    insert: insert,
+    all: all
+  };
   /*ACTIONS*/
-  function find(whereArray) {
-    let url = gUrl + entity;
-    let where = objectToSentence(whereArray);
-    return $http.post(url+'/find',{where:where});
+  function find(valArray, whereArray) {
+    let
+      url = gUrl + entity,
+      where = whereArray ? $hummer.objectToSentence(whereArray) : '1=1',
+      val = $hummer.arrayToSentence(valArray),
+      dataObject = {
+        where: where,
+        val: val
+      };
+    return $http.post(url + '/find', dataObject);
+  }
+
+  function all(whereArray) {
+    let
+      url = gUrl + entity,
+      where = whereArray ? $hummer.objectToSentence(whereArray) : '1=1';
+    return $http.post(url + '/find', {
+      where: where
+    });
+  }
+
+  function insert(valArray) {
+    console.log(valArray);
+    let
+      url = gUrl + entity,
+      _val = $hummer.returnQuotes(valArray);
+    return $http.post(url, {
+      val: _val
+    });
   }
   /*PRIVATE FUNCTIONS */
-  function objectToSentence(objectArray){
-    let sentence  ='' ;
-    for (var i = 0; i < objectArray.length; i++) {
-      for (var name in objectArray[i]) {
-        sentence += " "+ name  +" = '" + objectArray[i][name] + "' and";
-      }
-    }
-    sentence += ' 1= 1';
-    return sentence;
-  }
+
+
+
   /*PUBLIC FUNCTIONS */
-  function usuario () {
+  function usuario() {
     entity = 'usuarios';
     return methods;
   }
+  function cliente () {
+    entity  = 'clientes';
+    return methods;
+  }
   this.usuario = usuario;
+  this.cliente = cliente;
 }
 
 export default angular.module('nixApp.bifrost', [])

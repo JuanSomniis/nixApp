@@ -1,0 +1,132 @@
+<div layout='row' layout-align='center center'>
+  <md-card flex='50'>
+    <div class="content-brand">
+      <md-card-title class="gradient-sub">
+        <md-card-title-text>
+          <span class="md-headline">Nuevo activo</span>
+          <p class="md-body-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa ducimus quas alias iusto, voluptas esse, aspernatur nobis reprehenderit! Provident, error eaque veniam maxime optio in dolorem sequi quaerat voluptate quae.</p>
+        </md-card-title-text>
+      </md-card-title>
+    </div>
+    <md-card-content>
+      <form name="activoForm" ng-submit='$ctrl.nuevoUsuario(activoForm)'>
+        <!-- tipo de activo -->
+        <md-autocomplete
+          required
+          flex
+          md-input-name="tipoActivo"
+          md-search-text="tipoActivoSearch"
+          md-items="item in $ctrl.search(tipoActivoSearch)"
+          md-item-text="item"
+          md-floating-label="Activo">
+          <md-item-template>
+            <span md-highlight-text="tipoActivoSearch">{{item}}</span>
+          </md-item-template>
+          <div ng-messages="activoForm.tipoActivo.$error">
+            <div ng-message="required">Debes seleccionar o registrar un area.</div>
+          </div>
+        </md-autocomplete>
+        <!-- Serial -->
+        <md-input-container class="md-block" flex>
+          <label>Serial</label>
+          <input type='text' name="serial" ng-model="$ctrl.model.serial" md-maxlength="40" required>
+          <div ng-messages="activoForm.serial.$error">
+            <div ng-message="required">Campo requerido.</div>
+            <div ng-message="md-maxlength">El campo de serial no puede superar los 40 caracteres.</div>
+          </div>
+        </md-input-container>
+        <div layout='row'>
+          <!-- Marca -->
+          <md-input-container class="md-block" flex>
+            <label>Marca</label>
+            <input type='text' name="marca" ng-model="$ctrl.model.marca" md-maxlength="40" required>
+            <div ng-messages="activoForm.marca.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de marca no puede superar los 40 caracteres.</div>
+            </div>
+          </md-input-container>
+          <!-- Modelo -->
+          <md-input-container class="md-block" flex>
+            <label>Modelo</label>
+            <input type='text' name="modelo" ng-model="$ctrl.model.modelo" md-maxlength="40" required>
+            <div ng-messages="activoForm.modelo.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de marca no puede superar los 40 caracteres.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout='row'>
+          <!-- Seguridad -->
+          <md-input-container class="md-block" flex>
+            <label>Placa de seguridad</label>
+            <input type='text' name="seguridad" ng-model="$ctrl.model.seguridad" md-maxlength="40" required>
+            <div ng-messages="activoForm.seguridad.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de marca no puede superar los 40 caracteres.</div>
+            </div>
+          </md-input-container>
+          <!-- Inventario -->
+          <md-input-container class="md-block" flex>
+            <label>Placa de inventario</label>
+            <input type='text' name="inventario" ng-model="$ctrl.model.inventario" md-maxlength="40" required>
+            <div ng-messages="activoForm.inventario.$error">
+              <div ng-message="required">Campo requerido.</div>
+              <div ng-message="md-maxlength">El campo de marca no puede superar los 40 caracteres.</div>
+            </div>
+          </md-input-container>
+        </div>
+        <!-- Especificaciones -->
+        <md-input-container class="md-block">
+          <label>Espesificaciones</label>
+          <textarea name="espesificaciones" ng-model="$ctrl.model.espesificaciones" required></textarea>
+          <div ng-messages="activoForm.espesificaciones.$error">
+            <div ng-message="required">Campo requerido.</div>
+          </div>
+        </md-input-container>
+        <!-- CAMPO SELECCION DE CLIENTE CLIENTE
+              cliente = nombre_empresa  + nombre_sede
+              area = area wait the cliente
+        -->
+        <div layout='row'>
+          <!-- Cliente sinopcion de registro-->
+          <md-autocomplete
+            required
+            flex
+            md-input-name="cliente"
+            md-search-text="clienteSearch"
+            md-items="item in $ctrl.search(clienteSearch)"
+            md-item-text="item"
+            md-floating-label="Cliente"
+            md-require-match='true'
+            md-selected-item-change='$ctrl.loadArea()'>
+            <md-item-template>
+              <span md-highlight-text="clienteSearch">{{item}}</span>
+            </md-item-template>
+            <div ng-messages="activoForm.cliente.$error">
+              <div ng-message="required">Debes seleccionar o registrar un cliente.</div>
+            </div>
+          </md-autocomplete>
+          <!-- Area con opcion de registro y con wait async -->
+          <md-autocomplete
+            ng-disabled='true'
+            required
+            flex
+            md-input-name="area"
+            md-search-text="areaSearch"
+            md-items="item in $ctrl.search(areaSearch)"
+            md-item-text="item"
+            md-floating-label="Area">
+            <md-item-template>
+              <span md-highlight-text="areaSearch">{{item}}</span>
+            </md-item-template>
+            <div ng-messages="activoForm.area.$error">
+              <div ng-message="required">Debes seleccionar o registrar un area.</div>
+            </div>
+          </md-autocomplete>
+        </div>
+
+        <md-button class="md-primary" type='submit' ng-disabled='$ctrl.btnDisabled'>Registrar</md-button>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>

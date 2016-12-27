@@ -8,9 +8,10 @@ import routes from './master.routes';
 export class MasterComponent {
   /*@ngInject*/
   constructor() {
-    this.message = 'Hello';
+
   }
-  $onInit(){}
+  $onInit(){
+  }
 }
 
 export default angular.module('nixApp.master', [uiRouter])

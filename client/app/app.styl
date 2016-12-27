@@ -1,8 +1,14 @@
 $fa-font-path = '../assets/fonts/font-awesome/'
 @import '~font-awesome-stylus/stylus/index'
+$primary-color = #4a4a4a;
+$primary-color-dark =rgb(0, 165, 186);
+$font-color = black
+$fondo-nav = '../assets/images/fondo2.png';
+//#ede8dc
 
-
-
+#loading-bar .bar
+  background-color #F9A825!important
+  height 5px!important
 
 //
 // App-wide Styles
@@ -21,7 +27,9 @@ $fa-font-path = '../assets/fonts/font-awesome/'
 
 // Component styles are injected through gulp
 /* inject:styl */
+@import 'cliente/addCliente/addCliente';
 @import 'login/login';
 @import 'main/master/master';
 @import 'menu/menu';
+@import 'usuario/addUsuario/addUsuario';
 /* endinject */

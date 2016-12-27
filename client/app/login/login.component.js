@@ -6,10 +6,12 @@ import routes from './login.routes';
 
 export class LoginComponent {
   /*@ngInject*/
-  constructor($bi,$pop) {
+  constructor($bi,$pop,$state,$cookieStore) {
     //Se declaran dependencias /*SERVICIOS*/
     this.$bi = $bi;
     this.$pop = $pop;
+    this.$state = $state;
+    this.$cookieStore = $cookieStore;
   }
   /*FUNCTIONS */
   login(){ // => Funcion login donde valida si las credenciales son validas
@@ -19,18 +21,23 @@ export class LoginComponent {
       { pass :  this.model.pass}
     ]
     //Se hace la consulta a la base de datos
-    this.$bi.usuario().find(whereArray).then(response=>{
+    this.$bi.usuario().all(whereArray).then(response=>{
       //Se guarda el tamaño del data segun response
-      let dataLength = response.data.length
+      let data = response.data
       //En caso que el tamaño del data sea mayor a uno
-      if(!dataLength)
-        this.$pop.show('Credenciales incorrectas')
-      else
-        this.$pop.show('Credenciales correctas')
+      if(!data.length)
+        this.$pop.show(`Credenciales incorrectas`)
+      else{
+        this.$cookieStore.put('user', data[0]);
+        this.$state.go(`m.${data[0].rol}`)
+      }
+
     });
   }
   /* VARIABLES*/
   $onInit() {
+    let userData = this.$cookieStore.get('user');
+    if(userData) this.$state.go(`m.${userData.rol}`)
     this.model = new Object();
   }
 }

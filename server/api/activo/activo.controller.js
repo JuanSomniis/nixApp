@@ -1,11 +1,21 @@
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /api/activos              ->  index
- */
-
 'use strict';
+var ructor = require('../ructor');
 
-// Gets a list of Activos
+//Set the table to the crud
+let entity = 'activo';
+ructor.inner(entity);
+
 export function index(req, res) {
-  res.json([]);
+  ructor.all().then(response => res.json(response.recordset));
+}
+
+export function find(req, res) {
+  let where = req.body.where;
+  let val = req.body.val ? req.body.val : '*';
+  ructor.findBy(where, val).then(response => res.json(response.recordset));
+}
+
+export function insert(req, res) {
+  let val = req.body.val;
+  ructor.insert(val).then(response => res.send(response));
 }
