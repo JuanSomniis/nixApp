@@ -2,8 +2,8 @@
 
 var proxyquire = require('proxyquire').noPreserveCache();
 
-var thingCtrlStub = {
-  index: 'thingCtrl.index'
+var astralCtrlStub = {
+  index: 'astralCtrl.index'
 };
 
 var routerStub = {
@@ -11,24 +11,24 @@ var routerStub = {
 };
 
 // require the index with our stubbed out modules
-var thingIndex = proxyquire('./index.js', {
+var astralIndex = proxyquire('./index.js', {
   express: {
     Router() {
       return routerStub;
     }
   },
-  './thing.controller': thingCtrlStub
+  './astral.controller': astralCtrlStub
 });
 
-describe('Thing API Router:', function() {
+describe('Astral API Router:', function() {
   it('should return an express router instance', function() {
-    thingIndex.should.equal(routerStub);
+    astralIndex.should.equal(routerStub);
   });
 
-  describe('GET /api/things', function() {
-    it('should route to thing.controller.index', function() {
+  describe('GET /api/astral', function() {
+    it('should route to astral.controller.index', function() {
       routerStub.get
-        .withArgs('/', 'thingCtrl.index')
+        .withArgs('/', 'astralCtrl.index')
         .should.have.been.calledOnce;
     });
   });

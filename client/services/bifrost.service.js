@@ -2,42 +2,42 @@
 const angular = require('angular');
 /*@ngInject*/
 export function bifrostService($http, $hummer) {
-  let gUrl = '/api/';
-  let entity = '';
-  let methods = {
-    find: find,
-    insert: insert,
-    all: all
-  };
+  let
+    url = '/api/astral',
+    entity = '',
+    methods = {
+      find: find,
+      insert: insert,
+      all: all
+    };
   /*ACTIONS*/
   function find(valArray, whereArray) {
     let
-      url = gUrl + entity,
       where = whereArray ? $hummer.objectToSentence(whereArray) : '1=1',
       val = $hummer.arrayToSentence(valArray),
       dataObject = {
         where: where,
-        val: val
+        val: val,
+        entity: entity
       };
     return $http.post(url + '/find', dataObject);
   }
 
   function all(whereArray) {
     let
-      url = gUrl + entity,
       where = whereArray ? $hummer.objectToSentence(whereArray) : '1=1';
     return $http.post(url + '/find', {
-      where: where
+      where: where,
+      entity: entity
     });
   }
 
   function insert(valArray) {
-    console.log(valArray);
     let
-      url = gUrl + entity,
       _val = $hummer.returnQuotes(valArray);
     return $http.post(url, {
-      val: _val
+      val: _val,
+      entity: entity
     });
   }
   /*PRIVATE FUNCTIONS */
@@ -46,15 +46,29 @@ export function bifrostService($http, $hummer) {
 
   /*PUBLIC FUNCTIONS */
   function usuario() {
-    entity = 'usuarios';
+    entity = 'usuario';
     return methods;
   }
-  function cliente () {
-    entity  = 'clientes';
+
+  function cliente(vista) {
+    entity = vista ? vista : 'cliente';
     return methods;
   }
+
+  function activo() {
+    entity = 'activo';
+    return methods;
+  }
+
+  function area() {
+    entity = 'area';
+    return methods;
+  }
+
+  this.area = area;
   this.usuario = usuario;
   this.cliente = cliente;
+  this.activo = activo;
 }
 
 export default angular.module('nixApp.bifrost', [])

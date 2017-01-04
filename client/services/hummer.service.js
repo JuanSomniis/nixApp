@@ -52,12 +52,20 @@ export function hummerService() {
     for (let item in frm)
     //En caso que el key del item empiece con $ se sabe que es propio del formulario
       if (!(item.startsWith('$')))
-    //Se pasa al castObject los nuevos valores del modelo
+      //Se pasa al castObject los nuevos valores del modelo
         castObject[item] = frm[item].$modelValue;
-    //se retorna el objeto con los modelos
+      //se retorna el objeto con los modelos
     return castObject;
   }
 
+  function evaluateRepetition(list, value, key) {
+    let repeat = false;
+    list.forEach(item =>{
+      if (item[key] === value) repeat = true});
+    return repeat;
+  }
+
+  this.evaluateRepetition = evaluateRepetition;
   this.castFormToModel = castFormToModel;
   this.objectToArray = objectToArray;
   this.arrayToSentence = arrayToSentence;

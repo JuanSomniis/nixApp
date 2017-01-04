@@ -9,12 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
-  app.use('/api/usuarios', require('./api/usuario'));
-  app.use('/api/activos', require('./api/activo'));
-  app.use('/api/clientes', require('./api/cliente'));
-  app.use('/api/tickets', require('./api/ticket'));
-  //app.use('/api/connections', require('./api/connection'));
-  app.use('/api/things', require('./api/thing'));
+  app.use('/api/astral', require('./api/astral'));
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

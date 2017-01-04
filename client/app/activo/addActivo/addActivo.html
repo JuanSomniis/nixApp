@@ -9,18 +9,19 @@
       </md-card-title>
     </div>
     <md-card-content>
-      <form name="activoForm" ng-submit='$ctrl.nuevoUsuario(activoForm)'>
+      <form name="activoForm" ng-submit='$ctrl.nuevoActivo(activoForm)'>
         <!-- tipo de activo -->
         <md-autocomplete
           required
           flex
+          md-min-length="0"
           md-input-name="tipoActivo"
-          md-search-text="tipoActivoSearch"
-          md-items="item in $ctrl.search(tipoActivoSearch)"
+          md-search-text="$ctrl.tipoActivoSearch"
+          md-items="item in $ctrl.searchTipoActivo($ctrl.tipoActivoSearch)"
           md-item-text="item"
           md-floating-label="Activo">
           <md-item-template>
-            <span md-highlight-text="tipoActivoSearch">{{item}}</span>
+            <span md-highlight-text="$ctrl.tipoActivoSearch">{{item}}</span>
           </md-item-template>
           <div ng-messages="activoForm.tipoActivo.$error">
             <div ng-message="required">Debes seleccionar o registrar un area.</div>
@@ -92,32 +93,34 @@
           <md-autocomplete
             required
             flex
+            md-min-length="0"
             md-input-name="cliente"
-            md-search-text="clienteSearch"
-            md-items="item in $ctrl.search(clienteSearch)"
-            md-item-text="item"
+            md-search-text="$ctrl.clienteSearch"
+            md-items="item in $ctrl.searchCliente($ctrl.clienteSearch)"
+            md-item-text="item.nombre"
             md-floating-label="Cliente"
-            md-require-match='true'
-            md-selected-item-change='$ctrl.loadArea()'>
+            md-selected-item-change='$ctrl.selectedCliente(item)'>
             <md-item-template>
-              <span md-highlight-text="clienteSearch">{{item}}</span>
+              <span md-highlight-text="$ctrl.clienteSearch">{{item.nombre}}</span>
             </md-item-template>
             <div ng-messages="activoForm.cliente.$error">
-              <div ng-message="required">Debes seleccionar o registrar un cliente.</div>
+              <div ng-message="required">Debes seleccionar un cliente.</div>
             </div>
           </md-autocomplete>
           <!-- Area con opcion de registro y con wait async -->
           <md-autocomplete
-            ng-disabled='true'
+            ng-disabled='$ctrl.areaDisabled'
             required
             flex
+            md-min-length="0"
+            md-selected-item-change='$ctrl.selectedArea(item)'
             md-input-name="area"
-            md-search-text="areaSearch"
-            md-items="item in $ctrl.search(areaSearch)"
-            md-item-text="item"
+            md-search-text="$ctrl.areaSearch"
+            md-items="item in $ctrl.searchArea($ctrl.areaSearch)"
+            md-item-text="item.nombre"
             md-floating-label="Area">
             <md-item-template>
-              <span md-highlight-text="areaSearch">{{item}}</span>
+              <span md-highlight-text="$ctrl.areaSearch">{{item.nombre}}</span>
             </md-item-template>
             <div ng-messages="activoForm.area.$error">
               <div ng-message="required">Debes seleccionar o registrar un area.</div>
